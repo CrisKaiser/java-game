@@ -2,10 +2,18 @@ package scratch;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+
 import javax.swing.JFrame;
+
+import scratch.graphics.Screen;
 
 public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = 1L;
+	private final double LOGIC_UPDATE_RATE = 60.0;
 	
 	public static int width = 300;
 	public static int height = width / 16 * 9;
@@ -15,9 +23,16 @@ public class Game extends Canvas implements Runnable{
 	private JFrame frame;
 	private boolean running = false;
 	
+	private Screen screen;
+	
+	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData(); //converting image to int[]
+	
 	public Game() {
 		Dimension size = new Dimension(width*scale, height*scale);
 		setPreferredSize(size);
+		
+		this.screen = new Screen(width, height);
 		
 		frame = new JFrame();
 	}
@@ -39,9 +54,48 @@ public class Game extends Canvas implements Runnable{
 
 	@Override
 	public void run() {
+		long lastTime = System.nanoTime();
+		final double ns = 1000000000.0 / LOGIC_UPDATE_RATE; 
+		double delta = 0.0;
+		
 		while(running) {
 			
+			long now = System.nanoTime();
+			delta += (now - lastTime) / ns;
+			lastTime = now;
+			while(delta >= 1.0) {
+				update();
+				delta = 0.0;
+				System.out.println("update");
+			}
+			
+			render();
+			
 		}
+	}
+	
+	public void update() {
+		
+	}
+	
+	public void render() {
+		BufferStrategy bs = getBufferStrategy();
+		if (bs == null) {
+			createBufferStrategy(3);
+			return;
+		}
+		
+		screen.clear();
+		screen.render();
+		
+		for (int i = 0; i < pixels.length; i++) {
+			pixels[i] = screen.pixels[i];
+		}
+		
+		Graphics g = bs.getDrawGraphics();
+		g.drawImage(image, 0,0,getWidth(), getHeight(), null);
+		g.dispose();
+		bs.show();
 	}
 	
 	public static void main(String[] args) {
