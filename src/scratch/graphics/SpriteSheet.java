@@ -26,7 +26,7 @@ public class SpriteSheet {
 	
 	private void load() {
 		try {
-			BufferedImage image = ImageIO.read(new File("rsc/textures/spritesheet.png"));
+			BufferedImage image = ImageIO.read(new File("res/textures/spritesheet.png"));
 			int w = image.getWidth();
 			int h = image.getHeight();
 			image.getRGB(0,  0, w, h, pixels, 0, w);
