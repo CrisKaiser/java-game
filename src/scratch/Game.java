@@ -11,6 +11,8 @@ import javax.swing.JFrame;
 
 import scratch.graphics.Screen;
 import scratch.input.Keyboard;
+import scratch.level.Level;
+import scratch.level.RandomLevel;
 
 public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = 1L;
@@ -24,6 +26,8 @@ public class Game extends Canvas implements Runnable{
 	private JFrame frame;
 	private Keyboard key;
 	private boolean running = false;
+	
+	private Level level = new RandomLevel(64, 64);
 	
 	private Screen screen;
 	
@@ -108,7 +112,8 @@ public class Game extends Canvas implements Runnable{
 		}
 		
 		screen.clear();
-		screen.render(x, y);
+		
+		level.render(x, y, screen);
 		
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
