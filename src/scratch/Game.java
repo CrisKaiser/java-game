@@ -1,7 +1,9 @@
 package scratch;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -9,6 +11,7 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import scratch.entity.Player;
 import scratch.graphics.Screen;
 import scratch.input.Keyboard;
 import scratch.level.Level;
@@ -28,8 +31,9 @@ public class Game extends Canvas implements Runnable{
 	private boolean running = false;
 	
 	private Level level = new RandomLevel(64, 64);
-	
+	private Player player;
 	private Screen screen;
+	
 	
 	public static String title = "Scratch";
 	
@@ -43,6 +47,7 @@ public class Game extends Canvas implements Runnable{
 		this.screen = new Screen(width, height);
 		this.frame = new JFrame();
 		this.key = new Keyboard();
+		this.player = new Player(key);
 		
 		addKeyListener(key);
 	}
@@ -95,13 +100,10 @@ public class Game extends Canvas implements Runnable{
 		
 	}
 	
-	int x = 0, y = 0;
+
 	public void update() {
 		key.update();
-		if (key.up) y--;
-		if (key.down) y++;
-		if (key.left) x--;
-		if (key.right) x++; 
+		player.update();
 	}
 	
 	public void render() {
@@ -113,7 +115,7 @@ public class Game extends Canvas implements Runnable{
 		
 		screen.clear();
 		
-		level.render(x, y, screen);
+		level.render(player.x, player.y, screen);
 		
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
@@ -121,6 +123,9 @@ public class Game extends Canvas implements Runnable{
 		
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0,0,getWidth(), getHeight(), null);
+		g.setColor(Color.WHITE);
+		g.setFont(new Font("Font", 0, 50));
+		g.drawString(String.valueOf(player.x) +  " : " + String.valueOf(player.y), 450, 400);
 		g.dispose();
 		bs.show();
 	}
