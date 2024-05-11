@@ -26,7 +26,6 @@ public abstract class Mob extends Entity{
 	}
 	
 	public void render(Screen screen) {
-		screen.renderPlayer(x,  y,  Sprite.playerFront0);
 	}
 	
 	private boolean collision() {

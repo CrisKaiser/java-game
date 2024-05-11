@@ -17,15 +17,10 @@ public class Sprite {
 	public static Sprite playerFront2 = new Sprite(32, 2, 0, SpriteSheet.tiles);
 	public static Sprite playerFront3 = new Sprite(32, 3, 0, SpriteSheet.tiles);
 	
-	public static Sprite playerLeft0 = new Sprite(32, 0, 1, SpriteSheet.tiles);
-	public static Sprite playerLeft1 = new Sprite(32, 1, 1, SpriteSheet.tiles);
-	public static Sprite playerLeft2 = new Sprite(32, 2, 1, SpriteSheet.tiles);
-	public static Sprite playerLeft3 = new Sprite(32, 3, 1, SpriteSheet.tiles);
-	
-	public static Sprite playerRight0 = new Sprite(32, 0, 2, SpriteSheet.tiles);
-	public static Sprite playerRight1 = new Sprite(32, 1, 2, SpriteSheet.tiles);
-	public static Sprite playerRight2 = new Sprite(32, 2, 2, SpriteSheet.tiles);
-	public static Sprite playerRight3 = new Sprite(32, 3, 2, SpriteSheet.tiles);
+	public static Sprite playerSide0 = new Sprite(32, 0, 1, SpriteSheet.tiles);
+	public static Sprite playerSide1 = new Sprite(32, 1, 1, SpriteSheet.tiles);
+	public static Sprite playerSide2 = new Sprite(32, 2, 1, SpriteSheet.tiles);
+	public static Sprite playerSide3 = new Sprite(32, 3, 1, SpriteSheet.tiles);
 	
 	public static Sprite playerBack0 = new Sprite(32, 0, 3, SpriteSheet.tiles);
 	public static Sprite playerBack1 = new Sprite(32, 1, 3, SpriteSheet.tiles);

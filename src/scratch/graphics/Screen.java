@@ -55,22 +55,21 @@ public class Screen {
 		}
 	}
 	
-	public void renderPlayer(int xp, int yp, Sprite sprite) {
+	public void renderPlayer(int xp, int yp, Sprite sprite, int flip) {
 		xp -= xOffset;
 		yp -= yOffset;
 		for (int y = 0; y < 32; y++) {
 			int ya = y + yp;
+			int ys = y;
+			if (flip == 2 || flip == 3) ys = 31 - y;
 			for (int x = 0; x < 32; x++) {
 				int xa = x + xp;
-				{
-					if (xa < 0 - 32 || xa >= width || ya < 0 || ya >= height) break;
-					if (xa < 0) xa = 0;
-					int color = sprite.pixels[x + y * 32];
-					if (color != 0x000000) {
-						pixels[xa+ya*width] = color;
-					}
-					
-				}
+				int xs = x;
+				if (flip == 1 || flip == 3) xs = 31 - x;
+				if (xa < 0 - 32 || xa >= width || ya < 0 || ya >= height) break;
+				if (xa < 0) xa = 0;
+				int color = sprite.pixels[xs + ys * 32];
+				if (color != 0x000000) pixels[xa+ya*width] = color;
 			}
 		}
 	}
