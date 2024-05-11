@@ -1,10 +1,13 @@
 package scratch.entity;
 
+import scratch.graphics.Screen;
+import scratch.graphics.Sprite;
 import scratch.input.Keyboard;
 
 public class Player extends Mob{
 	
 	private Keyboard input;
+	private Sprite sprite;
 	
 	public Player(Keyboard input) {
 		this.input = input;
@@ -15,6 +18,7 @@ public class Player extends Mob{
 		this.x = x;
 		this.y = y;
 		this.input = input;
+		this.sprite = Sprite.playerFront0;
 	}
 	
 	public void update() {
@@ -27,7 +31,11 @@ public class Player extends Mob{
 		if (xDir != 0 || yDir != 0) move(xDir, yDir);
 	}
 	
-	public void render() {
-		
+	public void render(Screen screen) {
+		if (dir == 1) sprite = Sprite.playerRight0;
+		if (dir == 2) sprite = Sprite.playerFront0;
+		if (dir == 3) sprite = Sprite.playerLeft0;
+		if (dir == 4) sprite = Sprite.playerBack0;
+		screen.renderPlayer(x - 16, y - 16, sprite);
 	}
 }
