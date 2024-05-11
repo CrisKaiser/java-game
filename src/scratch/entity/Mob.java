@@ -1,5 +1,6 @@
 package scratch.entity;
 
+import scratch.graphics.Screen;
 import scratch.graphics.Sprite;
 
 public abstract class Mob extends Entity{
@@ -24,8 +25,8 @@ public abstract class Mob extends Entity{
 		
 	}
 	
-	public void render() {
-		
+	public void render(Screen screen) {
+		screen.renderPlayer(x,  y,  Sprite.playerFront0);
 	}
 	
 	private boolean collision() {

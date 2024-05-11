@@ -3,6 +3,7 @@ package scratch.graphics;
 import java.util.Iterator;
 import java.util.Random;
 
+import scratch.entity.Player;
 import scratch.level.tiles.Tile;
 
 public class Screen {
@@ -49,6 +50,26 @@ public class Screen {
 					if (xa < 0 - tile.sprite.SIZE || xa >= width || ya < 0 || ya >= height) break;
 					if (xa < 0) xa = 0;
 					pixels[xa+ya*width] = tile.sprite.pixels[x+y*tile.sprite.SIZE];
+				}
+			}
+		}
+	}
+	
+	public void renderPlayer(int xp, int yp, Sprite sprite) {
+		xp -= xOffset;
+		yp -= yOffset;
+		for (int y = 0; y < 32; y++) {
+			int ya = y + yp;
+			for (int x = 0; x < 32; x++) {
+				int xa = x + xp;
+				{
+					if (xa < 0 - 32 || xa >= width || ya < 0 || ya >= height) break;
+					if (xa < 0) xa = 0;
+					int color = sprite.pixels[x + y * 32];
+					if (color != 0x000000) {
+						pixels[xa+ya*width] = color;
+					}
+					
 				}
 			}
 		}
