@@ -27,6 +27,7 @@ public class Sprite {
 	public static Sprite playerBack2 = new Sprite(32, 2, 3, SpriteSheet.tiles);
 	public static Sprite playerBack3 = new Sprite(32, 3, 3, SpriteSheet.tiles);
 	
+	
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		SIZE = size;
 		pixels = new int[SIZE*SIZE];
