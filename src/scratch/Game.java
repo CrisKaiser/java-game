@@ -16,6 +16,7 @@ import scratch.graphics.Screen;
 import scratch.input.Keyboard;
 import scratch.level.Level;
 import scratch.level.RandomLevel;
+import scratch.level.SpawnLevel;
 
 public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = 1L;
@@ -30,7 +31,7 @@ public class Game extends Canvas implements Runnable{
 	private Keyboard key;
 	private boolean running = false;
 	
-	private Level level = new RandomLevel(64, 64);
+	private Level level = new SpawnLevel("res/textures/levelmap.png");
 	private Player player;
 	private Screen screen;
 	
