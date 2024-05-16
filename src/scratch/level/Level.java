@@ -5,9 +5,9 @@ import scratch.level.tiles.Tile;
 
 public class Level {
 	
-	protected Tile[] tiles;
 	protected int width, height;
 	protected int[] tilesInt;
+	protected int[] tiles;
 	
 	public Level(int width, int height) {
 		this.width = width;
@@ -47,22 +47,21 @@ public class Level {
 		
 		for (int y = y0; y < y1; y++) {
 			for (int x = x0; x < x1; x++) {
-				//getTile(x, y).render(x, y, screen);
-				if (x*y*32 < 0 || x*y*32 >= 256) {
-					Tile.DefaultTile.render(x, y, screen);
-					continue;
-				}
-				else {tiles[x*y*32].render(x,  y,  screen);
-				}
+				getTile(x, y).render(x, y, screen);
 			}
 		}
 	}
 	
+	//grass = 0x1e9c00
+	//flower = 0xFFFF00
+	//rock = 0x7F7F00
+	
 	public Tile getTile(int x, int y) {
 		if (!(x < 0 || y < 0 || x >= width || y >= height)) {
-			if (tilesInt[x+y*width] < 4) return Tile.grass;
-			if (tilesInt[x+y*width] < 6) return Tile.flower;
-			if (tilesInt[x+y*width] <= 8) return Tile.rock;
+			
+			if (tiles[x+y*width] == 0xFF1e9c00) return Tile.grass;
+			if (tiles[x+y*width] == 0xFFFFFF00) return Tile.flower;
+			if (tiles[x+y*width] == 0xFF7F7F00) return Tile.rock;
 		}
 		return Tile.DefaultTile;
 	}
